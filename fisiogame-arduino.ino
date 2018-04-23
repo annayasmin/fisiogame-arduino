@@ -1,14 +1,10 @@
-#include <HID.h> //V: INCLUI LIB KEYBOARD 
+#include <Keyboard.h> //V: INCLUI LIB KEYBOARD 
 const int pinoPot = A5; //PINO ANALÓGICO UTILIZADO PELO POTENCIÔMETRO
 int leituraA5; //VARIÁVEL QUE ARMAZENA O VALOR LIDO NA PORTA ANALÓGICA
   
 void setup(){  
   pinMode(pinoPot, INPUT); //DEFINE A PORTA COMO ENTRADA
   //Serial.begin(9600); //V: SERIAL COMENTADA  - INICIALIZA A SERIAL
-
-  // Starts Serial at baud 115200 otherwise HID wont work on Uno/Mega.
-  // This is not needed for Leonado/(Pro)Micro but make sure to activate desired USB functions in HID.h
-  Serial.begin(SERIAL_HID_BAUD); //V: INICIALIZAPORTA SERIAL
 
   // Sends a clean report to the host. This is important because
   // the 16u2 of the Uno/Mega is not turned off while programming
@@ -25,22 +21,22 @@ void loop(){
      Keyboard.print("Espera");
     //delay(2000);
   } else 
-  if ((leituraA5 > 700) && (leituraA5 < 949)){
+  if ((leituraA5 > 800) && (leituraA5 < 1023)){
     Serial.println("Estendido");
      Keyboard.print("w");
-     delay(500);
+     delay(600);
   } else 
-    if ((leituraA5 < 699) && (leituraA5 > 400)){
+    if ((leituraA5 < 799) && (leituraA5 > 500)){
     Serial.println("90 graus");
-     Keyboard.print("w");
+    Keyboard.print("w");
      delay(300);
   } else 
-    if ((leituraA5 < 399) && (leituraA5 > 0)){
+    if ((leituraA5 < 499) && (leituraA5 > 0)){
     Serial.println("Contraido");
-     Keyboard.print("w");
-     delay(100);
+    Keyboard.print("w");
+     delay(20);
   }
   
 
   
-}//w
+}
